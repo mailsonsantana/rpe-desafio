@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "6457dd3d-4563-4673-ab7f-ee956d33e726",
+		"name": "RPE - Desafio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15960768"
+	},
+	"item": [
+		{
+			"name": "Consultar Portador",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJjcGYiOiIwMjA4NzM2MjEyMiIsImlhdCI6MTcyNjg1MTI1NH0.ZG2F0943KSkrsGMH2IRWiF1nSUZOivaqNl7SobgRhHQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/carrier-service/api/carrier/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carrier-service",
+						"api",
+						"carrier",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Portador",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJjcGYiOiIwMjA4NzM2MjEyMiIsImlhdCI6MTcyNjg0NDc5NX0.1bkHqIpOJTumdErUoiuQ9GguyC_82_2QMVbAy99i2eY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-carrier-token",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"carrierName\": \"Transportadora XYZ\",\r\n    \"cpf\": \"123.456.789-00\",\r\n    \"status\": \"ACTIVE\",\r\n    \"birthdayDate\": \"1990-01-01\",\r\n    \"productId\": 1,\r\n    \"cardNumber\": \"4111-1111-1111-1111\",\r\n    \"password\": \"senhaSegura123\",\r\n    \"cardName\": \"João da Silva\",\r\n    \"cardStatus\": \"ACTIVE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/carrier-service/api/carrier/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carrier-service",
+						"api",
+						"carrier",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get TOKEN",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-carrier-token",
+						"value": "12345",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/carrier-service/api/token/param?cpf=02087362122",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carrier-service",
+						"api",
+						"token",
+						"param"
+					],
+					"query": [
+						{
+							"key": "cpf",
+							"value": "02087362122"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Produto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/product-service/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"product-service",
+						"api",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Produto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"description\": \"Cartão Black\",\r\n    \"status\": \"ACTIVE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/product-service/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"product-service",
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

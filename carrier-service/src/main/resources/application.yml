@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: carrier-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/soluctiondb
+    username: soluction
+    password: soluction
+  jpa:
+    hibernate:
+      ddl-auto: update
+  redis:
+    host: localhost
+    port: 6379
+server:
+  port: 8080
+  servlet:
+    context-path: /carrier-service
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+cloud:
+  aws:
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+    credentials:
+      access-key: test
+      secret-key: test
+    sqs:
+      endpoint: https://localhost.localstack.cloud:4566/000000000000
+
+
+card-sqs-name: https://localhost.localstack.cloud:4566/000000000000/cards-register
+carrier:
+  keysecret: '8R9SATCVDWEYGZH2K4M5N7Q8R9TBUCVEXFYG2J3K4N6P7Q8SATBUDWEXFZ'
+
+card-service: http://localhost:8082/card-service
+
+sqs-url: https://localhost.localstack.cloud:4566/000000000000
+
