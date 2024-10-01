@@ -2,15 +2,16 @@ spring:
   application:
     name: card-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/soluctiondb
-    username: soluction
-    password: soluction
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/soluctiondb}
+    username: ${SPRING_DATASOURCE_USERNAME:soluction}
+    password: ${SPRING_DATASOURCE_PASSWORD:soluction}
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
   redis:
-    host: localhost
-    port: 6379
+    host: ${SPRING_REDIS_HOST:localhost}
+    port: ${SPRING_REDIS_PORT:6379}
 server:
   port: 8082
   servlet:
@@ -30,9 +31,7 @@ cloud:
       access-key: test
       secret-key: test
     sqs:
-      endpoint: https://localhost.localstack.cloud:4566/000000000000
-
-
-product-service: http://localhost:8081/product-service
-card-sqs-name: https://localhost.localstack.cloud:4566/000000000000/cards-register
+      endpoint: ${SPRING_LOCALSTACK_HOST:https://localhost.localstack.cloud:4566/000000000000}
+product-service: ${SPRING_PRODUCT_SERVICE_URL:http://localhost:8081/product-service}
+card-sqs-name: ${SPRING_CARD_SQS_NAME:https://localhost.localstack.cloud:4566/000000000000/cards-register}
 
