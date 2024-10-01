@@ -8,12 +8,16 @@ services:
       POSTGRES_PASSWORD: soluction
     ports:
       - "5432:5432"
+    networks:
+      - rpe
 
   redis-rpe:
     image: redis:latest
     container_name: redis-rpe
     ports:
       - "6379:6379"
+    networks:
+      - rpe
 
   localstack-rpe:
     image: localstack/localstack
@@ -26,12 +30,15 @@ services:
       - "4510:4510"
     environment:
       - SERVICES=sqs  # Ativa o SQS
-#      - DEFAULT_REGION=us-east-1  # Região padrão
+      - DEFAULT_REGION=us-east-1  # Região padrão
       - AWS_ACCESS_KEY_ID=test
       - AWS_SECRET_ACCESS_KEY=test
       - AWS_REGION=us-east-1
+      - LOCALSTACK_HOST=localstack-rpe
     volumes:
       - "./01-init-aws.sh:/etc/localstack/init/ready.d/01-init-aws.sh"
+    networks:
+      - rpe
     
 
   product-service:
@@ -47,6 +54,8 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-rpe:5432/soluctiondb
       - SPRING_DATASOURCE_USERNAME=soluction
       - SPRING_DATASOURCE_PASSWORD=soluction
+    networks:
+      - rpe
   
 
   card-service:
@@ -66,9 +75,13 @@ services:
       - SPRING_DATASOURCE_PASSWORD=soluction
       - SPRING_REDIS_HOST=redis-rpe
       - SPRING_REDIS_PORT=6379
-      - SPRING_LOCALSTACK_HOST=https://localstack-rpe.localstack.cloud:4566/000000000000
+      - SPRING_LOCALSTACK_HOST=http://localstack-rpe:4566
       - SPRING_PRODUCT_SERVICE_URL=http://product-service:8081/product-service
-      - SPRING_CARD_SQS_NAME=https://localstack-rpe.localstack.cloud:4566/000000000000/cards-register
+      - SPRING_CARD_SQS_NAME=http://localstack-rpe:4566/000000000000/cards-register
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+    networks:
+      - rpe
 
 #  carrier-service:
 #    build:
@@ -82,3 +95,5 @@ services:
 
 volumes:
   localstack_data:
+networks:
+  rpe:
